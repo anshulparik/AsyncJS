@@ -1,0 +1,110 @@
+JS: In its most basic form, JS is synchronous, blocking, single threaded language.
+
+- Synchronous: line by line execution.
+- Blocking: no matter how much time previous process takes to execute, subsequent(next) process will
+    execute after the completion of previous process.
+- Single threaded: 
+  - Thread is simply a process that JS program can use to run a task.
+  - Each thread can only do one task at a time.
+  - JS has only one thread called Main Thread for executing an code.
+
+Note: This behaviour of JS creates problem for execution(slow). To overcome this 
+    we use Async JS.
+
+
+For async behaviour: 
+- JS is not enough.
+- For async behaviour we need new peices which are outside of JS (JS runtime environment).
+- Web browsers define function and APIs that allow us to register functions that should not 
+  be executed synchronously, and should instead be invoked asynchronously when some kind of 
+  event occurs.
+- Eg:  
+    - passage of time(setTimeout(),  setInterval()).        
+    - user's interaction with mouse (addEventListener).
+    - the arrival of data over network (callback, promises, async-await).
+
+- With asynchronous behaviour we can let our code do several things at the same time without
+  stopping or blocking our main thread.
+
+
+Note: JS asynchronous behaviour depends upon events(event-driven).
+
+
+To clear timeout:
+
+const greet = (name) => console.log(`Hello ${name});      // Hello Anshul
+cosnt timeOutId = setTimeout(greet, 2000, "Anshul");
+clearTimeout(timeOutId);
+
+Note: 
+- Clearing intervals works for setInterval too, Eg: clearInterval(intervalId).
+- Timeouts/Intervals are not part of JS.  
+- Duration parameter is the minimum delay, not guaranteed delay.
+- JS can only execute the function when the call-stack is free. If not function has to wait longer.  
+
+Usecase: When the component is unmounted we can clear the timeouts/intervals, for freeing up the resources
+    and also prevent the code from incorrectly executing on an unmounted component.
+
+
+Note: It is possible to achieve the same effect as setInterval() with a recursive setTimeout().
+
+Eg: 
+- setInterval(function test(){
+    console.log("Hello");
+ }, 2000);
+
+- setTimeout(function test(){
+    console.log("Hello");
+    setTimeout(test, 2000);
+ }, 2000);
+
+
+- However, there are differences in these approaches:
+  - In recursive "setTimeout()", same 2000 ms delay is fixed between executions, irrespective 
+    of how long the code takes to run (interval will remain the same).
+  - We can calculate a different delay before running each iteration.
+
+
+  - In "setInterval()", interval duration includes the time taken to execute the code.
+    eg: the code takes 500 ms to run then, the interval is 1500 ms (2000 - 500 = 1500(delay)).
+  - setInterval is always a fixed interval duration.   
+
+
+
+
+
+In JS, functions are first class objects.
+- Just like objects, a function can be passed as an argument to a function.
+- functions can be returned as values from other functions.
+
+- Any function that is passed to an another function as an argument is called a "callback".
+- Any function that accepts a function as an argument and returns a function is called a 
+  "higher order function".
+
+
+Types of callbacks:
+- Synchronous
+  - A callback which is executed immediately is called synchronous callback.
+  - Eg: sort, map, filter etc. (also HOF)
+
+- Asynchronous  
+  - A callback that is often used to continue or resume code execution after an 
+    asynchronous operation has completed.
+  - Callbacks are used to delay the execution of a function until a particular time
+    or event has occured.
+  - Eg: setTimeout, setInterval, addEventListener(function waits to execute till the event occurs).
+
+
+Callback hell:
+If we have multiple callback functions where each level depends on the result obtained from 
+the previous level, the nesting of the functions become so deep that the code becomes difficult 
+to read and maintain.
+
+
+Note: To tackle this problem ES6 introduced "promises".
+
+
+
+//  ======================================================================================================
+
+

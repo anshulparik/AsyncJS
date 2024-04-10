@@ -1,0 +1,29 @@
+In JS, functions are first class objects.
+- Just like objects, a function can be passed as an argument to a function.
+- functions can be returned as values from other functions.
+
+- Any function that is passed to an another function as an argument is called a "callback".
+- Any function that accepts a function as an argument and returns a function is called a 
+  "higher order function".
+
+
+Types of callbacks:
+- Synchronous
+  - A callback which is executed immediately is called synchronous callback.
+  - Eg: sort, map, filter etc. (also HOF)
+
+- Asynchronous  
+  - A callback that is often used to continue or resume code execution after an 
+    asynchronous operation has completed.
+  - Callbacks are used to delay the execution of a function until a particular time
+    or event has occured.
+  - Eg: setTimeout, setInterval, addEventListener(function waits to execute till the event occurs).
+
+
+Callback hell:
+If we have multiple callback functions where each level depends on the result obtained from 
+the previous level, the nesting of the functions become so deep that the code becomes difficult 
+to read and maintain.
+
+
+Note: To tackle this problem ES6 introduced "promises".

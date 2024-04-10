@@ -1,0 +1,38 @@
+To clear timeout:
+
+const greet = (name) => console.log(`Hello ${name});      // Hello Anshul
+cosnt timeOutId = setTimeout(greet, 2000, "Anshul");
+clearTimeout(timeOutId);
+
+Note: 
+- Clearing intervals works for setInterval too, Eg: clearInterval(intervalId).
+- Timeouts/Intervals are not part of JS.  
+- Duration parameter is the minimum delay, not guaranteed delay.
+- JS can only execute the function when the call-stack is free. If not function has to wait longer.  
+
+Usecase: When the component is unmounted we can clear the timeouts/intervals, for freeing up the resources
+    and also prevent the code from incorrectly executing on an unmounted component.
+
+
+Note: It is possible to achieve the same effect as setInterval() with a recursive setTimeout().
+
+Eg: 
+- setInterval(function test(){
+    console.log("Hello");
+ }, 2000);
+
+- setTimeout(function test(){
+    console.log("Hello");
+    setTimeout(test, 2000);
+ }, 2000);
+
+
+- However, there are differences in these approaches:
+  - In recursive "setTimeout()", same 2000 ms delay is fixed between executions, irrespective 
+    of how long the code takes to run (interval will remain the same).
+  - We can calculate a different delay before running each iteration.
+
+
+  - In "setInterval()", interval duration includes the time taken to execute the code.
+    eg: the code takes 500 ms to run then, the interval is 1500 ms (2000 - 500 = 1500(delay)).
+  - setInterval is always a fixed interval duration.   
